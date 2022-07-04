@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.function.Predicate;
 
-public class PropertiesCheck {
+public class SettingHelper {
 
     public static String getServerAuthUrl(CommonProperties properties, Boolean secured) throws FieldPropertiesEmptyException {
         Predicate<CommonProperties> autPortUrlEmpty = x ->  (StringUtils.isBlank(x.getAuthServer().getIpAddress()) || StringUtils.isBlank(x.getAuthServer().getPort()));
@@ -40,6 +40,7 @@ public class PropertiesCheck {
 
         return url.toString();
     }
+
 
 
 }

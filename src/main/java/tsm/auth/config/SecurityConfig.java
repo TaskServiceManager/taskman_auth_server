@@ -29,7 +29,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import tsm.auth.exceptions.FieldPropertiesEmptyException;
-import tsm.auth.helper.PropertiesCheck;
+import tsm.auth.helper.SettingHelper;
 import tsm.auth.properties.CommonProperties;
 
 import java.security.KeyPair;
@@ -138,7 +138,7 @@ public class SecurityConfig {
     }
 
     private String buildServerUrl() throws FieldPropertiesEmptyException {
-        return PropertiesCheck.getServerAuthUrl(properties, false);
+        return SettingHelper.getServerAuthUrl(properties, false);
     }
 
 

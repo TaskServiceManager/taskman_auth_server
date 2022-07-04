@@ -1,5 +1,6 @@
 package tsm.auth.exceptions;
 
+
 public class FieldPropertiesEmptyException extends Exception{
 
     private static final String DEFAULT_MESSAGE = "Field(s) properties (is)are empty: ";

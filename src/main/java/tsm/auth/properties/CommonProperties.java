@@ -40,7 +40,7 @@ public class CommonProperties {
 
         private String ipAddress;
 
-        private String port;
+        private Integer port;
     }
 
 

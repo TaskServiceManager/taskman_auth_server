@@ -2,6 +2,8 @@ package tsm.auth.providers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,11 +26,21 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
         UserDetails user = customUserDetailService.loadUserByUsername(username);
-        return null;
+        return checkPassword(password, user);
+    }
+
+    private Authentication checkPassword(String password, UserDetails user) {
+        if(passwordEncoder.matches(password, user.getPassword())) {
+           return new UsernamePasswordAuthenticationToken(
+                   user.getUsername(),
+                   user.getPassword(),
+                   user.getAuthorities()
+           );
+        } else throw new BadCredentialsException("Bad Credentials");
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return false;
+        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
     }
 }
