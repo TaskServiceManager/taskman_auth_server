@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 public class SettingHelper {
 
     public static String getServerAuthUrl(CommonProperties properties, Boolean secured) throws FieldPropertiesEmptyException {
-        Predicate<CommonProperties> autPortUrlEmpty = x ->  (StringUtils.isBlank(x.getAuthServer().getIpAddress()) || StringUtils.isBlank(x.getAuthServer().getPort()));
+        Predicate<CommonProperties> autPortUrlEmpty = x ->  (StringUtils.isBlank(x.getAuthServer().getIpAddress()) || Objects.isNull(x.getAuthServer().getPort()));
         StringJoiner err = new StringJoiner("\n");
         StringJoiner url = new StringJoiner("");
         if(Objects.nonNull(properties.getAuthServer())) {
@@ -30,7 +30,7 @@ public class SettingHelper {
                         url.add("https://");
                     }
                     url.add(properties.getAuthServer().getIpAddress());
-                    url.add(properties.getAuthServer().getPort());
+                    url.add(String.valueOf(properties.getAuthServer().getPort()));
                 }
             }
         }

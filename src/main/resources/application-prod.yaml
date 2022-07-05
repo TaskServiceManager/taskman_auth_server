@@ -11,4 +11,3 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
-

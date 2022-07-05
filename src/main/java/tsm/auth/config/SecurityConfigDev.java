@@ -42,7 +42,7 @@ import java.util.UUID;
 @EnableConfigurationProperties(CommonProperties.class)
 @Configuration
 @RequiredArgsConstructor
-public class SecurityConfig {
+public class SecurityConfigDev {
 
     private CommonProperties properties;
 
