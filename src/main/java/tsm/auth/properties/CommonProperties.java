@@ -2,11 +2,15 @@ package tsm.auth.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 
-@Component
 @Data
+@Configuration
+@Primary
 @ConfigurationProperties(prefix = "tsm", ignoreUnknownFields = false)
 public class CommonProperties {
 
@@ -19,7 +23,7 @@ public class CommonProperties {
     @Data
     public static class Broker {
 
-        private String URL;
+        private String uRL;
 
         private String vHost;
 
