@@ -16,6 +16,7 @@ import tsm.auth.repository.UserRepository;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -24,13 +25,11 @@ public class CustomUserDetailService implements UserDetailsService {
 
     private UserRepository userRepository;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(11);
-    }
+    private Boolean enableSuperUser;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
         return userRepository.findByEmail(email).map(
                 user -> new User(
                         user.getEmail(),
@@ -39,16 +38,9 @@ public class CustomUserDetailService implements UserDetailsService {
                         true,
                         true,
                         true,
-                        List.of(user.getRole()).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList())
+                        Stream.of(user.getRole()).map(SimpleGrantedAuthority::new).toList()
                 )).orElseThrow(() -> new UsernameNotFoundException(email));
     }
 
-    // Access Granted list of roles
-//    private Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {
-//        List<GrantedAuthority>  authorities = new ArrayList<>();
-//        for(String role: roles) {
-//            authorities.add(new SimpleGrantedAuthority(role));
-//        }
-//        return authorities;
-//    }
+
 }

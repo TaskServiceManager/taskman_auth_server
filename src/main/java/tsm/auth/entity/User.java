@@ -13,9 +13,9 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Accessors(chain = true)
 public class User {
 
     @Id

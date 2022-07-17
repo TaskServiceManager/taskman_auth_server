@@ -9,9 +9,8 @@ import java.util.StringJoiner;
 import java.util.function.Predicate;
 
 public class SettingHelper {
-
+    private static final Predicate<CommonProperties> autPortUrlEmpty = x ->  (StringUtils.isBlank(x.getAuthServer().getIpAddress()) || Objects.isNull(x.getAuthServer().getPort()));
     public static String getServerAuthUrl(CommonProperties properties, Boolean secured) throws FieldPropertiesEmptyException {
-        Predicate<CommonProperties> autPortUrlEmpty = x ->  (StringUtils.isBlank(x.getAuthServer().getIpAddress()) || Objects.isNull(x.getAuthServer().getPort()));
         StringJoiner err = new StringJoiner("\n");
         StringJoiner url = new StringJoiner("");
         if(Objects.nonNull(properties.getAuthServer())) {
@@ -37,7 +36,6 @@ public class SettingHelper {
         if(err.length()>0) {
             throw new FieldPropertiesEmptyException(err.toString());
         }
-
         return url.toString();
     }
 
